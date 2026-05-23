@@ -1,0 +1,3 @@
+Information Security Policy
+
+Employees must use strong passwords and enable multi-factor authentication on all company systems. Confidential documents must not be shared outside the company. Lost or stolen devices must be reported to IT within 24 hours.
