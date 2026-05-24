@@ -1,4 +1,3 @@
 flask
-sentence-transformers
-chromadb
+scikit-learn
 gunicorn

@@ -1,19 +1,10 @@
 from flask import Flask, request, jsonify
-
 import os
-from sentence_transformers import SentenceTransformer
-import chromadb
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 app = Flask(__name__)
 
-# Load embedding model
-model = SentenceTransformer("paraphrase-MiniLM-L3-v2")
-# Create ChromaDB client
-client = chromadb.Client()
-
-collection = client.get_or_create_collection(name="policies")
-
-# Load documents
 policy_folder = "policies"
 
 documents = []
@@ -28,15 +19,8 @@ for filename in os.listdir(policy_folder):
         documents.append(text)
         ids.append(filename)
 
-# Create embeddings
-embeddings = model.encode(documents).tolist()
-
-# Add to database
-collection.add(
-    documents=documents,
-    embeddings=embeddings,
-    ids=ids
-)
+vectorizer = TfidfVectorizer()
+document_vectors = vectorizer.fit_transform(documents)
 
 @app.route("/")
 def home():
@@ -195,25 +179,25 @@ def health():
 def chat():
 
     data = request.json
-
     question = data.get("question")
 
-    question_embedding = model.encode([question]).tolist()[0]
+    question_vector = vectorizer.transform([question])
 
-    results = collection.query(
-        query_embeddings=[question_embedding],
-        n_results=3
+    similarities = cosine_similarity(
+        question_vector,
+        document_vectors
     )
 
-    documents = results["documents"][0]
-    sources = results["ids"][0]
+    top_indices = similarities[0].argsort()[-3:][::-1]
 
     answer = ""
+    source_list = []
 
-    for doc in documents:
-        answer += doc + "\\n\\n"
+    for index in top_indices:
+        answer += documents[index] + "\\n\\n"
+        source_list.append(ids[index])
 
-    source = ", ".join(sources)
+    source = ", ".join(source_list)
 
     return jsonify({
         "answer": answer,
