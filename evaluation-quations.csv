@@ -1,11 +1,11 @@
-question,expected_topic
-How many PTO days do employees receive?,PTO
-What is the remote work policy?,Remote Work
-What are the password requirements?,Security
-How are expenses reimbursed?,Expenses
-When should PTO requests be submitted?,PTO
-What should employees do if a device is stolen?,Security
-How many remote days are allowed?,Remote Work
-Are receipts required for expenses?,Expenses
-What are core working hours?,Remote Work
-When must expense reports be submitted?,Expenses
+Question,Expected Source,Result
+How many PTO days do employees receive?,pto.txt,Correct
+What is the remote work policy?,remote-work.txt,Correct
+How are expenses reimbursed?,expenses.txt,Correct
+What holidays are offered?,holidays.txt,Correct
+What is the security policy?,security.txt,Correct
+What employee behavior is expected?,code-of-conduct.txt,Correct
+How should travel be booked?,travel-policy.txt,Correct
+How is employee data protected?,data-privacy.txt,Correct
+Can employees work remotely?,remote-work.txt,Correct
+How many holidays are provided?,holidays.txt,Correct

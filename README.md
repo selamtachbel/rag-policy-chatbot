@@ -1,46 +1,45 @@
 # Policy RAG Chatbot
 
-## Project Overview
-This project is a Retrieval-Augmented Generation (RAG) chatbot built with Flask, ChromaDB, and Sentence Transformers.
+## Overview
 
-The chatbot allows users to ask questions about company policies and retrieves the most relevant policy document before generating an answer.
+This project is a lightweight Retrieval-Augmented Generation (RAG) chatbot that answers employee policy questions using company policy documents.
 
----
+The chatbot retrieves relevant information from policy files and provides answers with source citations.
 
 ## Features
-- Policy document retrieval
-- Semantic search using embeddings
-- Flask web application
-- Interactive UI
+
+- Policy question answering
 - Source citation display
-- ChromaDB vector database
+- Multi-document retrieval
+- Web interface
+- Public deployment on Render
+- GitHub Actions CI/CD
 
----
+## Architecture
 
-## Technologies Used
-- Python
-- Flask
-- Sentence Transformers
-- ChromaDB
-- HTML/CSS/JavaScript
+User Question
+↓
+TF-IDF Vectorizer
+↓
+Cosine Similarity Search
+↓
+Top Matching Policy Documents
+↓
+Answer + Source Citations
 
----
+## Policy Documents
 
-## Project Structure
+- PTO Policy
+- Remote Work Policy
+- Security Policy
+- Expense Policy
+- Holiday Policy
+- Code of Conduct Policy
+- Travel Policy
+- Data Privacy Policy
 
-```text
-rag-policy-chatbot/
-│
-├── app.py
-├── requirements.txt
-├── README.md
-├── ai-tooling.md
-├── design-and-evaluation.md
-│
-├── policies/
-│   ├── pto.txt
-│   ├── remote-work.txt
-│   ├── security.txt
-│   └── expenses.txt
-│
-└── venv/
+## Installation
+
+```bash
+pip install -r requirements.txt
+python app.py
